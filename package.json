@@ -4,11 +4,12 @@
   "description": "a simple game-like app that involves making a list of movies by their release date",
   "main": "server/index.js",
   "scripts": {
-    "build": "webpack",
-    "dev": "nodemon --watch server & webpack --watch",
+    "build": "webpack --watch",
+    "dev": "npm-run-all --parallel watch build",
     "postinstall": "webpack",
     "start": "node server",
-    "test": "mocha"
+    "test": "mocha",
+    "watch": "nodemon server --watch"
   },
   "repository": {
     "type": "git",
@@ -28,11 +29,11 @@
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
+    "npm-run-all": "^4.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-redux": "^5.0.5",
-    "redux": "^3.7.1",
-    "webpack": "^3.1.0"
+    "webpack": "^3.1.0",
+    "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
     "express": "^4.15.3"
