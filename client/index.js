@@ -1,11 +1,18 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import {render} from 'react-dom'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
 
 import App from './components/App'
+import reducers from './reducers'
+
+const store = createStore(reducers)
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <App />,
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById('app')
   )
 })

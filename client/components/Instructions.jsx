@@ -1,10 +1,24 @@
 import React from 'react'
-import ListContainer from './List-Container'
+import {ModalContainer, ModalDialog} from 'react-modal-dialog'
+import {connect} from 'react-redux'
 
-function App (props) {
+import {closeInstructions} from '../actions'
+
+function Instructions (props) {
   return (
-    <ListContainer />
+    <ModalContainer onClose={props.closeInstructions}>
+      <ModalDialog onClose={props.closeInstructions}>
+        <h2>Instructions</h2>
+        <p>Your goal is to arrange the list of movies in order from oldest to newest</p>
+      </ModalDialog>
+    </ModalContainer>
   )
 }
 
-export default App
+function mapDispatchToProps (dispatch) {
+  return {
+    closeInstructions: () => dispatch(closeInstructions())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Instructions)

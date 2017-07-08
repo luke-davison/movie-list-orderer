@@ -1,12 +1,16 @@
 import React from 'react'
 import Draggable from 'react-draggable'
+import {connect} from 'react-redux'
+
+import {itemDragged} from '../actions'
 
 class ListItem extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       dragging: 'false',
-      position: this.props.position
+      position: this.props.position,
+      moving: false
     }
     this.handleStart = this.handleStart.bind(this)
     this.handleDrag = this.handleDrag.bind(this)
@@ -17,8 +21,8 @@ class ListItem extends React.Component {
     this.setState({dragging: true})
   }
 
-  handleDrag () {
-    // placeholder
+  handleDrag (e) {
+    this.props.itemDragged(this.props.itemId, e.clientX, e.clientY)
   }
 
   handleStop () {
@@ -39,4 +43,10 @@ class ListItem extends React.Component {
   }
 }
 
-export default ListItem
+function mapDispatchToProps (dispatch) {
+  return {
+    itemDragged: (itemId, x, y) => dispatch(itemDragged(itemId, x, y))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ListItem)
